@@ -7,10 +7,10 @@ import { Response } from "express";
 export const postAuthors: RequestHandler = async(req: {body: { FirstName: string, LastName:string, Email: string, Age:number  }}, res: Response ) => {
     if(req.body.FirstName&& req.body.LastName && req.body.Email && req.body.Age){
         const newAuthor = new Authors({
-            firstName: req.body.FirstName,
-            lastName: req.body.LastName,
-            email: req.body.Email,
-            age: req.body.Age
+            FirstName: req.body.FirstName,
+            LastName: req.body.LastName,
+            Email: req.body.Email,
+            Age: req.body.Age
         })
         newAuthor.save().then((data) => {
             console.log(data);
