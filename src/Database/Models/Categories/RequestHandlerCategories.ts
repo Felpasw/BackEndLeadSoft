@@ -52,7 +52,7 @@ export const getAuthors: RequestHandler = async(req, res: Response) => {
 //-----------------
 export const getAuthor: RequestHandler = async(req, res: Response) => {
     if(req.params._id){
-        const AuthorFound = await Categories.findById(req.params._id); 
+        const CategorieFound = await Categories.findById(req.params._id); 
     }
     else{
         throw new Error("Can't get Author without ID!");   
