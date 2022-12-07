@@ -1,15 +1,23 @@
 import { RequestHandler, Response } from "express";
-import Articles from ".";
+import { Types }from "mongoose";
+import Articles from "../../Database/Models/Articles";
+import Article from "../../types/Articles";
+const ObjectId = Types.ObjectId
+
+
+
+
+
 
 
 //------------------------------------------------
-export const postArticles: RequestHandler = async(req: {body: {authorID: string, title:string, description: string, text:string, categorieID:string }}, res: Response ) => {
+export const postArticles: RequestHandler = async(req: {body: {authorID: Types.ObjectId, title:string, description: string, text:string, categoryID:Types.ObjectId }}, res: Response ) => {
     if(req.body.authorID) {
         if(req.body.title && req.body.description && req.body.text){
-            if(req.body.categorieID){
+            if(req.body.categoryID){
                 const newArticle = new Articles({
-                    authorID: req.body.authorID,
-                    categorieID: req.body.categorieID,
+                    authorID: new ObjectId(`${req.body.authorID}`),
+                    categorieID: new ObjectId(req.body.categoryID),
                     title: req.body.title,
                     description: req.body.description,
                     text: req.body.text,
@@ -24,7 +32,7 @@ export const postArticles: RequestHandler = async(req: {body: {authorID: string,
                 authorID: req.body.authorID,
                 title: req.body.title,
                 description: req.body.description,
-                text: req.body.text
+                text: req.body.text,
             });
             newArticle.save().then((data) =>{
                 console.log(data);
@@ -54,13 +62,13 @@ export const postArticles: RequestHandler = async(req: {body: {authorID: string,
 //------------------------------------------------
 export const putArticles: RequestHandler = async(req , res: Response ) => {
         const ArticleToUpdate = await Articles.findByIdAndUpdate(req.params._id, req.body);
-        console.log(ArticleToUpdate);
+        res.json(ArticleToUpdate);
         res.status(200);
     }
 //------------------------------------------------
 export const delArticles: RequestHandler = async(req, res: Response ) => {
     if(req.params._id){
-        const delArticle = await Articles.findByIdAndDelete(req.params._id);
+        const delArticle = await Articles.findByIdAndRemove(req.params._id);
         res.status(200);
         res.json(delArticle);
     }
@@ -75,8 +83,8 @@ export const getArticles: RequestHandler = async(req, res: Response) => {
     res.json(AllArticles);
 }
 //------------------------------------------------
-export const getArticle: RequestHandler = async(req: {body: {_id:string}}, res: Response ) => {
-    const ArticleFound = Articles.findById(req.body._id);
-    res.status(200)
-    res.json(ArticleFound)
+export const getArticle: RequestHandler = async(req, res: Response) => {
+    const ArticleFound = await Articles.findById(req.params._id);
+    res.status(200);
+    res.json(ArticleFound);
 }

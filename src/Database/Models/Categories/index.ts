@@ -8,4 +8,4 @@ const Categories = new mongoose.Schema({
         type:String
     }
 })
-export default mongoose.model('Authors', Categories);
+export default mongoose.model('Categories', Categories);

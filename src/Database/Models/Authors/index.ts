@@ -10,10 +10,9 @@ const Authors = new mongoose.Schema({
     Age: {
         type: Number
     },
-    email: {
+    Email: {
         type: String 
     }
-
 })
 
-export default mongoose.model('Authors', Authors)
+export default  mongoose.model("Authors", Authors);

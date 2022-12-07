@@ -2,7 +2,8 @@ import mongoose from 'mongoose';
 
 const Articles = new mongoose.Schema({
     authorID:{
-        type: String
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: "Author"
     },
     title:{
         type: String
@@ -13,8 +14,9 @@ const Articles = new mongoose.Schema({
     text: {
         type: String
     },
-    categorieID:{
-        type: String
+    categoryID:{
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: "Categories"
     }
 
 })
