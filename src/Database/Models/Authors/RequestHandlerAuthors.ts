@@ -3,14 +3,14 @@ import Authors from ".";
 import { Response } from "express";
 
 
-
-export const postAuthors: RequestHandler = async(req: {body: { firstName: string, lastName:string, email: string, age:number  }}, res: Response ) => {
-    if(req.body.firstName&& req.body.lastName && req.body.email && req.body.age){
+//-----------------
+export const postAuthors: RequestHandler = async(req: {body: { FirstName: string, LastName:string, Email: string, Age:number  }}, res: Response ) => {
+    if(req.body.FirstName&& req.body.LastName && req.body.Email && req.body.Age){
         const newAuthor = new Authors({
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            email: req.body.email,
-            age: req.body.age
+            firstName: req.body.FirstName,
+            lastName: req.body.LastName,
+            email: req.body.Email,
+            age: req.body.Age
         })
         newAuthor.save().then((data) => {
             console.log(data);
@@ -26,9 +26,13 @@ export const postAuthors: RequestHandler = async(req: {body: { firstName: string
         res.json(error);
     }
 }
-export const putAuthors: RequestHandler = async(req: {body: {title:string, description: string, text:string }}, res: Response ) => {
-
+//-----------------
+export const putAuthors: RequestHandler = async(req, res: Response ) => {
+    const ArticleToUpdate = await Authors.findByIdAndUpdate(req.params._id, req.body);
+    console.log(ArticleToUpdate);
+    res.status(200);
 }
+//-----------------
 export const delAuthors: RequestHandler = async(req, res: Response ) => {
     if(req.params._id){
         const delAuthor = await Authors.findByIdAndDelete(req.params._id);
@@ -36,13 +40,21 @@ export const delAuthors: RequestHandler = async(req, res: Response ) => {
         res.json(delAuthor);
     }
     else{
-        throw new Error("Can't delete Article without ID!");        
+        throw new Error("Can't delete Author without ID!");        
     }
 }
-export const getAuthors: RequestHandler = async(req, res: Response ) => {
-    
-
+//-----------------
+export const getAuthors: RequestHandler = async(req, res: Response) => {
+    const AllAuthors = await Authors.find();
+    res.json(AllAuthors);
+    res.status(200);
 }
-export const getAuthor: RequestHandler = async(req: {body: {title:string, description: string, text:string }}, res: Response ) => {
-
+//-----------------
+export const getAuthor: RequestHandler = async(req, res: Response) => {
+    if(req.params._id){
+        const AuthorFound = await Authors.findById(req.params._id); 
+    }
+    else{
+        throw new Error("Can't get Author without ID!");   
+    }
 }
