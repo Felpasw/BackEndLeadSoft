@@ -48,7 +48,7 @@ it("should be able to connect a Categorie to an Article", async() =>{
         title: "New Title!",
         description: "Here's some description!",
         text: "Here's some text!",
-        categorieID: "categorieID!"
+        categorieID: new ObjectId("6390cdb86e8ed3c2ce9bc687")
     } 
     const PostResponse: AxiosResponse = await axios.post("http://localhost:4000/newArticle", Article);
     expect(PostResponse.status).toBe(200);
