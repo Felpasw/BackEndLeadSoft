@@ -21,7 +21,7 @@ it("should be able to create and delete a categorie", async() =>{
 //--------------------
 it("should be able to edit a category", async() =>{
     const editCategory: categories = {
-        Name: "Macaco",
+        Name: "Documentario",
         Type: "Animal"
    }
    const putResponse: AxiosResponse = await axios.put(`http://localhost:4000/editCategory/6390cdb86e8ed3c2ce9bc687`, editCategory);

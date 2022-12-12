@@ -27,8 +27,8 @@ export const postCategories: RequestHandler = async(req: {body: { Name: string, 
 //-----------------
 export const putCategories: RequestHandler = async(req, res: Response ) => {
     if(req.params._id){
-        const CategorieToUpdate = await Categories.findByIdAndUpdate(req.params._id, req.body);
-        res.json(CategorieToUpdate);
+        const CategoryToUpdate = await Categories.findByIdAndUpdate(req.params._id, req.body);
+        res.json(CategoryToUpdate);
         res.status(200);
     }
     else{
@@ -43,9 +43,9 @@ export const putCategories: RequestHandler = async(req, res: Response ) => {
 //-----------------
 export const delCategories: RequestHandler = async(req, res: Response ) => {
     if(req.params._id){
-        const delCategorie = await Categories.findByIdAndRemove(req.params._id);
+        const delCategory = await Categories.findByIdAndRemove(req.params._id);
         res.status(200);
-        res.json(delCategorie);
+        res.json(delCategory);
     }
     else{
         const error = {
@@ -62,11 +62,11 @@ export const getCategories: RequestHandler = async(req, res: Response) => {
     res.status(200);
 }
 //-----------------
-export const getCategorie: RequestHandler = async(req, res: Response) => {
+export const getCategory: RequestHandler = async(req, res: Response) => {
     if(req.params._id){
-        const CategorieFound = await Categories.findById(req.params._id); 
+        const CategoryFound = await Categories.findById(req.params._id); 
         res.status(200)
-        res.json(CategorieFound);
+        res.json(CategoryFound);
     }
     else{
         const error = {

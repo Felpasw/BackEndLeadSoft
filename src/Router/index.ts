@@ -35,7 +35,7 @@ router.post("/newCategory", Categories.postCategories);
 router.put("/editCategory/:_id", Categories.putCategories);
 router.delete("/deleteCategory/:_id", Categories.delCategories);
 router.get("/Categories", Categories.getCategories);
-router.get("/Category/:_id", Categories.getCategorie);
+router.get("/Category/:_id", Categories.getCategory);
 //Comments sets
 router.post("/newComment", Comments.postComments);
 router.put("/editComment/:_id", Comments.putComments);
